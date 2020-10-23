@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>导航</title>
+    <link rel="stylesheet" href="../../web_resources/web_lib/layui/css/layui.css">
+    <!--    <script src="/Users/admin/examination-web/resource/lib/layui/layui.js"></script>-->
+    <script src="../../web_resources/web_lib/layui/layui.js"></script>
+    <style>
+        .input_space input{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .icon_style{
+            text-align: center;
+        }
+        .icon_style span{
+            margin:20px 50px 100px 50px;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="layui-nav" >
+    <li class="layui-nav-item">
+        <a href="">&nbsp;</a>
+    </li>
+    <li class="layui-nav-item">
+        <a href=""></a>
+    </li>
+    <li class="layui-nav-item" lay-unselect="" style="float: right">
+        <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img" >我</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:;">修改信息</a></dd>
+            <dd><a href="javascript:;">安全管理</a></dd>
+            <dd><a href="javascript:;">退了</a></dd>
+        </dl>
+    </li>
+</ul>
+
+
+<ul class="layui-nav layui-nav-tree layui-inline layui-nav-side" lay-filter="demo" style="margin-right: 20px;  margin-top: 60px">
+    <li class="layui-nav-item">
+        <a href="javascript:;">班级管理</a>
+        <dl class="layui-nav-child">
+            <dd><a href="select_student.html" >查询学生</a></dd>
+            <dd><a href="select_grade.html">查看成绩</a></dd>
+            <dd><a href="notice.html">公告发布</a></dd>
+        </dl>
+    </li>
+
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="subject.html">科目管理</a>
+    </li>
+
+    <li class="layui-nav-item">
+        <a href="question.html">试题管理</a>
+        <dl class="layui-nav-child">
+            <dd><a href="update_question.html">修改试题</a></dd>
+            <dd><a href="my_question.html">我的录题</a></dd>
+        </dl>
+    </li>
+
+    <li class="layui-nav-item">
+        <a href="javascript:;">考试管理</a>
+        <dl class="layui-nav-child">
+            <dd><a href="add_examination.html">添加考试</a></dd>
+            <dd><a href="update_examination.html">修改考试</a></dd>
+            <dd><a href="delete_examination.html">删除考试</a></dd>
+            <dd><a href="select_examination.html">查看考试</a></dd>
+            <dd><a href="publish_examination.html">发布考试</a></dd>
+        </dl>
+    </li>
+
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="select_examinee.html">查询考生</a>
+    </li>
+</ul>
+
+<!-- 内容 -->
+<div style="margin-left: 210px; margin-top: 10px; ">
+    <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">试题管理</a>
+      </span>
+    <div style="margin-top: 50px; width:800px;">
+        <div style="margin-top: 30px; width: 800px;">
+            <form class="layui-form" action="" id="data-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">试题id</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入试题id" autocomplete="off" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">题目id</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入题目id" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-input-inline" style="float: right;margin-top: -35px;margin-right: -5px;">
+                      <span><button type="submit" id="btn" style="border: none;background: none" ><i class="layui-icon layui-icon-search" style="font-size: 35px; color: #1E9FFF;"></i></button></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div style="margin-left:50px;">
+
+            <table id="demo" lay-filter="test"></table>
+            <div id="test1"></div>
+
+        </div>
+
+
+
+
+    </div>
+</div>
+</body>
+<script>
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        //监听导航点击
+        element.on('nav(demo)', function (elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+    //动态表格
+
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height: 312
+            ,url: '/demo/table/user/' //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {field: 'id', title: 'ID', width:90, sort: true, fixed: 'left'}
+                ,{field: 'username', title: '出题编号', width:90}
+                ,{field: 'sex', title: '试题编号', width:100}
+                ,{field: 'city', title: '题库编号', width:90}
+            ]]
+        });
+
+    });
+
+
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+            ,count: 50 //数据总数，从服务端得到
+        });
+    });
+</script>
+</html>
