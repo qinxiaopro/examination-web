@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>导航</title>
+    <link rel="stylesheet" href="../../web_resources/web_lib/layui/css/layui.css">
+    <!--    <script src="/Users/admin/examination-web/resource/lib/layui/layui.js"></script>-->
+    <script src="../../web_resources/web_lib/layui/layui.js"></script>
+</head>
+<body>
+
+<ul class="layui-nav">
+    <li class="layui-nav-item">
+        <a href="">&nbsp;</a>
+    </li>
+    <li class="layui-nav-item">
+        <a href=""></a>
+    </li>
+    <li class="layui-nav-item" lay-unselect="" style="float: right">
+        <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+        <dl class="layui-nav-child">
+            <dd><a href="update_TeacherInfo.html">修改信息</a></dd>
+            <dd><a href="javascript:;">安全管理</a></dd>
+            <dd><a href="javascript:;">退出</a></dd>
+        </dl>
+    </li>
+</ul>
+
+
+<ul class="layui-nav layui-nav-tree layui-inline layui-nav-side" lay-filter="demo"
+    style="margin-right: 20px;  margin-top: 60px">
+    <li class="layui-nav-item">
+        <a href="signup_examination.html">报名考试</a>
+    </li>
+
+
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="my_examination.html">我的考试</a>
+    </li>
+
+    <li class="layui-nav-item">
+        <a href="on-line_my_examination.html">在线考试</a>
+    </li>
+
+
+    <li class="layui-nav-item">
+        <a href="javascript:;">考模练习</a>
+        <dl class="layui-nav-child">
+            <dd><a href="test_examination.html">测验考试</a></dd>
+            <dd><a href="simulation_examination.html">模拟考试</a></dd>
+        </dl>
+    </li>
+
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="select_grades.html">查看成绩</a>
+    </li>
+</ul>
+
+<!-- 内容 -->
+<div style="margin-left: 210px; margin-top: 10px; ">
+    测试考试
+</div>
+
+
+</body>
+<script>
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        //监听导航点击
+        element.on('nav(demo)', function (elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+
+</html>
